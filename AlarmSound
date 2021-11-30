@@ -1,0 +1,59 @@
+from tkinter import *
+import datetime
+import time
+import winsound
+
+
+# import calendar
+# date = datetime.date(r_month, r_day, r_year)
+# date = datetime.date.("%m/%d/%Y")
+
+def alarm(set_reminder_alarm):
+    while True:
+        time.sleep(1)
+        current_time = datetime.datetime.now()
+        now = current_time.strftime("%H:%M:%S")
+        # date = current_time.strftime("%m/%d/%Y")
+        # print("Alarm is set for: ", date)
+        # print(now)
+        if now == set_reminder_alarm: # and date == set_reminder_alarm:
+            print(reminder.get())
+            winsound.PlaySound("sound.wav", winsound.SND_ASYNC)
+            break
+
+
+def reminder_time():
+   # {r_month.get()}: {r_day.get()}:{r_year.get()}:
+    set_reminder_alarm = f"{hours.get()}:{mins.get()}:{secs.get()}"
+    alarm(set_reminder_alarm)
+
+
+clock = Tk()
+clock.title("Reminder Alarm")
+clock.geometry("400x200")
+format_time = Label(clock, text="Enter time in 24 hour format!", fg="red", bg="black", font="Arial").place(x=60, y=120)
+add_time = Label(clock, text="Hour  Min   Sec", font=60).place(x=110)
+
+addReminder = Label(clock, text="Reminder", font=60).place(x=110, y=50)
+# addDate = Label(clock, text="date", font=60).place(x=180, y=50)
+set_alarm = Label(clock, text="Set Alarm", fg="blue", relief="solid", font=("Helvetica", 7, "bold")).place(x=0,
+                                                                                                           y=29)
+# turning variables into strings:
+hours = StringVar()
+mins = StringVar()
+secs = StringVar()
+# r_day = StringVar()
+# r_month = StringVar()
+# r_year = StringVar()
+reminder = StringVar()
+# temporary gui
+hour_time = Entry(clock, textvariable=hours, bg="white", width=15).place(x=110, y=30)
+min_time = Entry(clock, textvariable=mins, bg="white", width=15).place(x=150, y=30)
+sec_time = Entry(clock, textvariable=secs, bg="white", width=15).place(x=200, y=30)
+
+reminderTime = Entry(clock, textvariable=reminder, bg="white", width=15).place(x=110, y=80)
+# dayTime = Entry(clock, textvariable=r_day, bg="white", width=16).place(x=180, y=80)
+# monthTime = Entry(clock, textvariable=r_month, bg="white", width=16).place(x=220, y=80)
+# yearTime = Entry(clock, textvariable=r_year, bg="white", width=16).place(x=260, y=80)
+submit = Button(clock, text="Set Alarm", fg="red", width=10, command=reminder_time).place(x=110, y=100)
+clock.mainloop()
